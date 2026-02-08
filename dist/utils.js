@@ -1,4 +1,4 @@
-export function normalizeTransacao(transacao) {
+export function normalizeTransaction(transacao) {
     return {
         newClient: Boolean(transacao["Cliente Novo"]),
         date: transacao.Data,
@@ -19,15 +19,13 @@ function stringToNumber(valor) {
     }
     return resultado;
 }
-export function formatarMoeda(valor) {
+export function formatCurrency(valor) {
     return valor.toLocaleString("pt-BR", {
         style: "currency",
         currency: "BRL",
     });
 }
-export function calcularTotal(transacoes) {
-    console.log("Transações:", transacoes);
-    console.log("Primeira transação:", transacoes[0]);
+export function calculateTotal(transacoes) {
     return transacoes.reduce((total, transacao) => total + transacao.value, 0);
 }
 //# sourceMappingURL=utils.js.map

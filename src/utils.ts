@@ -1,6 +1,6 @@
 import type { TransacaoAPI, Transacao } from "./types.js";
 
-export function normalizeTransacao(transacao: TransacaoAPI): Transacao {
+export function normalizeTransaction(transacao: TransacaoAPI): Transacao {
   return {
     newClient: Boolean(transacao["Cliente Novo"]),
     date: transacao.Data,
@@ -25,15 +25,13 @@ function stringToNumber(valor: string): number {
   return resultado;
 }
 
-export function formatarMoeda(valor: number): string {
+export function formatCurrency(valor: number): string {
   return valor.toLocaleString("pt-BR", {
     style: "currency",
     currency: "BRL",
   });
 }
 
-export function calcularTotal(transacoes: Transacao[]): number {
-  console.log("Transações:", transacoes);
-  console.log("Primeira transação:", transacoes[0]);
+export function calculateTotal(transacoes: Transacao[]): number {
   return transacoes.reduce((total, transacao) => total + transacao.value, 0);
 }

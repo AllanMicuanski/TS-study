@@ -1,7 +1,7 @@
 import type { Transacao } from "./types.js";
-import { formatarMoeda } from "./utils.js";
+import { formatCurrency } from "./utils.js";
 
-function criarCabecalho(): HTMLTableSectionElement {
+function createTableHeader(): HTMLTableSectionElement {
   const thead = document.createElement("thead");
   thead.innerHTML = `
     <tr>
@@ -15,19 +15,19 @@ function criarCabecalho(): HTMLTableSectionElement {
   return thead;
 }
 
-function criarLinha(transacao: Transacao): HTMLTableRowElement {
+function createTableRow(transacao: Transacao): HTMLTableRowElement {
   const tr = document.createElement("tr");
   tr.innerHTML = `
     <td>${transacao.name}</td>
     <td>${transacao.email}</td>
-    <td>${formatarMoeda(transacao.value)}</td>
+    <td>${formatCurrency(transacao.value)}</td>
     <td>${transacao.paymentMethod}</td>
     <td>${transacao.status}</td>
   `;
   return tr;
 }
 
-export function renderizarEstatisticas(total: number): void {
+export function renderStatistics(total: number): void {
   const container = document.querySelector<HTMLDivElement>("#estatisticas");
 
   if (!container) {
@@ -37,12 +37,12 @@ export function renderizarEstatisticas(total: number): void {
 
   container.innerHTML = `
     <div class="estatistica">
-      <strong>Total:</strong> ${formatarMoeda(total)}
+      <strong>Total:</strong> ${formatCurrency(total)}
     </div>
   `;
 }
 
-export function renderizarTabela(transacoes: Transacao[]): void {
+export function renderTable(transacoes: Transacao[]): void {
   const container = document.querySelector<HTMLDivElement>("#transacoes");
 
   if (!container) {
@@ -51,11 +51,11 @@ export function renderizarTabela(transacoes: Transacao[]): void {
   }
 
   const tabela = document.createElement("table");
-  const thead = criarCabecalho();
+  const thead = createTableHeader();
   const tbody = document.createElement("tbody");
 
   transacoes.forEach((transacao) => {
-    const linha = criarLinha(transacao);
+    const linha = createTableRow(transacao);
     tbody.appendChild(linha);
   });
 

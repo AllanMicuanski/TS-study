@@ -1,16 +1,16 @@
-import { fetchTransacoes } from "./api.js";
-import { renderizarTabela, renderizarEstatisticas } from "./render.js";
-import { calcularTotal } from "./utils.js";
-async function iniciar() {
+import { fetchTransactions } from "./api.js";
+import { renderTable, renderStatistics } from "./render.js";
+import { calculateTotal } from "./utils.js";
+async function init() {
     try {
-        const transacoes = await fetchTransacoes();
-        const total = calcularTotal(transacoes);
-        renderizarEstatisticas(total);
-        renderizarTabela(transacoes);
+        const transactions = await fetchTransactions();
+        const total = calculateTotal(transactions);
+        renderStatistics(total);
+        renderTable(transactions);
     }
     catch (error) {
         console.error("Falha ao carregar transações:", error);
     }
 }
-iniciar();
+init();
 //# sourceMappingURL=script.js.map

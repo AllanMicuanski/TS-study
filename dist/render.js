@@ -1,5 +1,5 @@
-import { formatarMoeda } from "./utils.js";
-function criarCabecalho() {
+import { formatCurrency } from "./utils.js";
+function createTableHeader() {
     const thead = document.createElement("thead");
     thead.innerHTML = `
     <tr>
@@ -12,18 +12,18 @@ function criarCabecalho() {
   `;
     return thead;
 }
-function criarLinha(transacao) {
+function createTableRow(transacao) {
     const tr = document.createElement("tr");
     tr.innerHTML = `
     <td>${transacao.name}</td>
     <td>${transacao.email}</td>
-    <td>${formatarMoeda(transacao.value)}</td>
+    <td>${formatCurrency(transacao.value)}</td>
     <td>${transacao.paymentMethod}</td>
     <td>${transacao.status}</td>
   `;
     return tr;
 }
-export function renderizarEstatisticas(total) {
+export function renderStatistics(total) {
     const container = document.querySelector("#estatisticas");
     if (!container) {
         console.warn("Container #estatisticas não encontrado");
@@ -31,21 +31,21 @@ export function renderizarEstatisticas(total) {
     }
     container.innerHTML = `
     <div class="estatistica">
-      <strong>Total:</strong> ${formatarMoeda(total)}
+      <strong>Total:</strong> ${formatCurrency(total)}
     </div>
   `;
 }
-export function renderizarTabela(transacoes) {
+export function renderTable(transacoes) {
     const container = document.querySelector("#transacoes");
     if (!container) {
         console.warn("Container #transacoes não encontrado");
         return;
     }
     const tabela = document.createElement("table");
-    const thead = criarCabecalho();
+    const thead = createTableHeader();
     const tbody = document.createElement("tbody");
     transacoes.forEach((transacao) => {
-        const linha = criarLinha(transacao);
+        const linha = createTableRow(transacao);
         tbody.appendChild(linha);
     });
     tabela.appendChild(thead);

@@ -1,7 +1,7 @@
 import type { TransacaoAPI, Transacao } from "./types.js";
-import { normalizeTransacao } from "./utils.js";
+import { normalizeTransaction } from "./utils.js";
 
-export async function fetchTransacoes(): Promise<Transacao[]> {
+export async function fetchTransactions(): Promise<Transacao[]> {
   try {
     const response = await fetch(
       "https://api.origamid.dev/json/transacoes.json",
@@ -12,7 +12,7 @@ export async function fetchTransacoes(): Promise<Transacao[]> {
     }
 
     const json: TransacaoAPI[] = await response.json();
-    return json.map(normalizeTransacao);
+    return json.map(normalizeTransaction);
   } catch (error) {
     console.error("Erro ao buscar transações:", error);
     throw error;
