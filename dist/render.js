@@ -23,6 +23,18 @@ function criarLinha(transacao) {
   `;
     return tr;
 }
+export function renderizarEstatisticas(total) {
+    const container = document.querySelector("#estatisticas");
+    if (!container) {
+        console.warn("Container #estatisticas não encontrado");
+        return;
+    }
+    container.innerHTML = `
+    <div class="estatistica">
+      <strong>Total:</strong> ${formatarMoeda(total)}
+    </div>
+  `;
+}
 export function renderizarTabela(transacoes) {
     const container = document.querySelector("#transacoes");
     if (!container) {

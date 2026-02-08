@@ -27,6 +27,21 @@ function criarLinha(transacao: Transacao): HTMLTableRowElement {
   return tr;
 }
 
+export function renderizarEstatisticas(total: number): void {
+  const container = document.querySelector<HTMLDivElement>("#estatisticas");
+
+  if (!container) {
+    console.warn("Container #estatisticas não encontrado");
+    return;
+  }
+
+  container.innerHTML = `
+    <div class="estatistica">
+      <strong>Total:</strong> ${formatarMoeda(total)}
+    </div>
+  `;
+}
+
 export function renderizarTabela(transacoes: Transacao[]): void {
   const container = document.querySelector<HTMLDivElement>("#transacoes");
 
