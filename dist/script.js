@@ -1,11 +1,15 @@
 import { fetchTransactions } from "./api.js";
 import { renderTable, renderStatistics } from "./render.js";
-import { calculateTotal } from "./utils.js";
+import { calculateTotal, countByPaymentMethod, countByStatus, totalSalesByWeekDay, getBestSalesDay, } from "./utils.js";
 async function init() {
     try {
         const transactions = await fetchTransactions();
         const total = calculateTotal(transactions);
-        renderStatistics(total);
+        const paymentMethods = countByPaymentMethod(transactions);
+        const status = countByStatus(transactions);
+        const salesByWeekDay = totalSalesByWeekDay(transactions);
+        const bestDay = getBestSalesDay(salesByWeekDay);
+        renderStatistics(total, paymentMethods, status, salesByWeekDay, bestDay);
         renderTable(transactions);
     }
     catch (error) {
